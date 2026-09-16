@@ -2,7 +2,7 @@
 from bintreeFile import Bintree
 from linkedQFile import LinkedQ
 
-
+q = LinkedQ()
 alfabet = list("abcdefghijklmnopqrstuvwxyzåäö")
 svenska = Bintree()
 gamla = Bintree()
@@ -15,10 +15,7 @@ with open("word3.txt", "r", encoding = "utf-8") as svenskfil:
             svenska.put(ordet)             # in i sökträdet
 
 
-[startord, slutord] = input("Startord Slutord: ").split()
-
-
-def makechildren(ord):
+def makechildren(ord,q,slutord):
     gamla.put(ord)
     letters = list(ord)
     for bokstav in alfabet:
@@ -28,23 +25,20 @@ def makechildren(ord):
             nyttord = nyttord[0] + nyttord[1] + nyttord[2]
             if nyttord in svenska and nyttord not in gamla:
                 gamla.put(nyttord)
-                print(nyttord, end=' ')
-    print('\n')
+                q.enqueue(nyttord)
+                if slutord == nyttord:
+                    print("Det finns en väg till", slutord)
+                    return True
+    return False            
 
-
-        # nyttord1 = bokstav + letters[1] + letters[2]
-        # nyttord2 = letters[0] + bokstav + letters[2]
-        # nyttord3 = letters[0] + letters[1] + bokstav
-
-        # if nyttord1 in svenska and nyttord1 not in gamla:
-        #     gamla.put(nyttord1)
-
-        # if nyttord2 in svenska and nyttord2 not in gamla:
-        #     gamla.put(nyttord2)
-
-        # if nyttord3 in svenska and nyttord3 not in gamla:
-        #     gamla.put(nyttord3)
-        
-
-
-makechildren(startord)
+def main():
+    [startord, slutord] = input("Startord Slutord: ").split()
+    q.enqueue(startord)
+    stop = False
+    while not q.isEmpty() and not stop:
+        ord = q.dequeue()
+        stop = makechildren(ord,q,slutord)
+    if stop == 0:
+        print('Det finns ingen väg till',slutord)
+if __name__ == "__main__":
+    main()

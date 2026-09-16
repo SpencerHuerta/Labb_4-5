@@ -83,7 +83,7 @@ def skriv(p):
 
 
 if __name__ == "__main__":
-
+    pass
     # q = Bintree()
 
     
@@ -101,11 +101,3 @@ if __name__ == "__main__":
     # # q.put(45)
     # # q.put(55)
     # # q.put(70)
-    a = "a"
-    b = "b"
-    c = "c"
-    A = a+b+c
-    print(A)
-    alfabet = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, Å, Ä, Ö].lower()
-
-
