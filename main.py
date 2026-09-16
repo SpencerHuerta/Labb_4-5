@@ -1,25 +1,23 @@
 
 from bintreeFile import Bintree
-
-def makeTree():
-    tree = Bintree()
-    data = input().strip()
-    while data != "#":
-        tree.put(data)
-        data = input().strip()
-    return tree
-
-def searches(tree):
-    findme = input().strip()
-    while findme != "#":
-        if findme in tree:
-            print(findme, "found")
+svenska = Bintree()
+engelska = Bintree()
+with open("word3.txt", "r", encoding = "utf-8") as svenskfil:
+    for rad in svenskfil:
+        ordet = rad.strip()                # Ett trebokstavsord per rad
+        if ordet in svenska:
+            pass 
         else:
-            print(findme, "not found")
-        findme = input().strip()
-
-def main():
-    tree = makeTree()
-    searches(tree)
-
-main()
+            svenska.put(ordet)             # in i sökträdet
+with open("engelska.txt", "r", encoding = "utf-8") as engelskafil:
+    for rad in engelskafil:
+        orden = rad.strip().split()                # Ett trebokstavsord per rad
+        for ordet in orden:
+            if ordet in engelska:
+                pass 
+            else:
+                engelska.put(ordet)             # in i sökträdet
+                if ordet in svenska:   
+                    print(ordet, end = " ") 
+   
+print("\n")
